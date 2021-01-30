@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 #include "Variables.h"
 
 #include "BitMap.h"
