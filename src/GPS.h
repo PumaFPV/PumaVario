@@ -79,5 +79,5 @@ void gps_kml_path()
   {
     Serial.print(F("INVALID"));
   }
-  
+
 }

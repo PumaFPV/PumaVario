@@ -1,6 +1,3 @@
-
-
-
 void createDir(fs::FS &fs, const char * path)
 {
     Serial.printf("Creating Dir: %s\n", path);

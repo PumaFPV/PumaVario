@@ -1,7 +1,5 @@
 #include <Arduino.h>
 
-/*test*/
-
 #include "Variables.h"
 
 #include "BitMap.h"
