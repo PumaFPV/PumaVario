@@ -28,7 +28,7 @@ void setup()
     //gps_setup();
 
     display_setup();
-    //nik arthur
+    
     baro_setup();
 
     //mpu_setup();
