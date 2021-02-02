@@ -12,7 +12,7 @@
 #include <SPI.h> //comms SD
 #include <TinyGPS++.h>// GPS
 #include <Wire.h>//comms I2C (baro,MPU(acc,gyro,mag))
-#include <BMP280.h>//baro
+#include <MS5611.h>//baro
 #include <MPU9250.h>//MPU
 #include <SimpleKalmanFilter.h>//data filter (smoooooth criminal)
 #include <Tone32.h>//Buzzer
@@ -32,6 +32,9 @@
 //--------------------------------------------------Define--------------------------------------------------
 
 //Pins
+#define I2C_SDA 21
+#define I2C_SCL 22
+
 #define SPI_MOSI 23
 #define SPI_MISO -1
 #define SPI_CLK 18
@@ -67,16 +70,14 @@ TinyGPSPlus gps;
 
 MPU9250 mpu;
 
-BMP280 bmp;
+MS5611 MS5611(0x77);   // 0x76 = CSB to VCC; 0x77 = CSB to GND
 
+/*
 SimpleKalmanFilter pressureKalmanFilter(3, 3, 0.8);
 SimpleKalmanFilter varioKalmanFilter(0.9, 0.9, 1);
-
-
+*/
 
 //--------------------------------------------------Variables--------------------------------------------------
-
-float P0 = 1013.25;
 
 int page = 0;
 
@@ -89,17 +90,11 @@ void page4();
 void page5();
 
 //----------BMP
-void baro_loop();
-float get_baro_altitude();
-double T, P, A;
 
-unsigned long baro_previous_millis = 0;        // will store last time LED was updated
-
-const long baro_interval = 500;           // interval at which to blink (milliseconds)
-
-
+//----------SD
 bool sd_ok = false;
 
+//----------Button
 bool button_state;
 
 //----------Vario
