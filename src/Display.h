@@ -80,23 +80,10 @@ void page1()
 {
     display.fillRect(5, 0, 250, 80, GxEPD_WHITE);
 
-    char result = bmp.startMeasurment();
- 
-    if(result!=0)
-    {
-        delay(result);
-        result = bmp.getTemperatureAndPressure(T,P);
-    
-        if (result!=0)
-        {
-            A = bmp.altitude(P, P0);
-        }
-    }
-
     display.setFont(&FreeMonoBold9pt7b);
     display.setCursor(5,14);
     display.print("Baro alti = \t");
-    display.print(A, 2); 
+    //display.print(A, 2); 
     display.println(" m");
 
     display.setCursor(5, 28);
