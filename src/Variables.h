@@ -2,7 +2,6 @@
 #define variables_h  //gratuit et nécessaire pour les includes
 
 
-
 //--------------------------------------------------Include libraries--------------------------------------------------
 
 // include library, include base class, make path known
