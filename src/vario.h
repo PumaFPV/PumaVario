@@ -32,8 +32,8 @@ void vario_loop()
     sumPa2 = 0;
     for (int i = 0; i <= 9; i++)
     {
-      sumPa1 =+ tabPa1[i];
-      sumPa2 =+ tabPa2[i];
+      sumPa1 += tabPa1[i];
+      sumPa2 += tabPa2[i];
     }
     avPa1 = sumPa1/10;
     avPa2 = sumPa2/10;
