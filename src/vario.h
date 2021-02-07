@@ -1,8 +1,42 @@
 
-
+float tabPa1[10] = {0}; //20 to 11 last pressure measures
+float tabPa2[10] = {0}; //10 last measures
+float avPa1; //average value of tabPa1
+float avPa2; //average value of tabPa2
+float sumPa1;
+float sumPa2;
+float deltaPa;
+void vario_init()
+{
+  for (int i = 0; i <= 9; i++ )
+  {
+    tabPa1[i] = getPressure();
+    tabPa2[i] = getPressure();
+  }
+}
 
 void vario_loop()
-{
+{ 
+  for (int i = 0; i <=8; i++)
+    {
+      tabPa1[i] = tabPa1[i+1];
+    }
+    tabPa1[9] = tabPa2[0];
+  for (int i = 0; i <=8; i++)
+    {
+      tabPa2[i] = tabPa2[i+1];
+    }
+    tabPa1[9] = getPressure();
+    sumPa1 = 0;
+    sumPa2 = 0;
+    for (int i = 0; i <= 9; i++)
+    {
+      sumPa1 = sumPa1 + tabPa1[i];
+      sumPa2 = sumPa2 + tabPa2[i];
+    }
+    avPa1 = sumPa1/10;
+    avPa2 = sumPa2/10;
+    deltaPa = avPa2 - avPa1;
   /*
   if(vario_kalman < vario_min_threshold)  // sinking
   {
