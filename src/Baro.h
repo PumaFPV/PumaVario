@@ -1,32 +1,47 @@
+double referencePressure;
+
+void checkSettings()
+{
+  Serial.print("Oversampling: ");
+  Serial.println(ms5611.getOversampling());
+}
+
 void baro_setup()
 {
-  if(MS5611.begin())
+  // Initialize MS5611 sensor
+  Serial.println("Initialize MS5611 Sensor");
+
+  while(!ms5611.begin())
   {
-    Serial.println("Baro init succeded");
+    Serial.println("Could not find a valid MS5611 sensor, check wiring!");
+    delay(500);
   }
-  else
-  {
-    Serial.println("Baro init failed");
-  }
+
+  // Get reference pressure for relative altitude
+  referencePressure = ms5611.readPressure();
+
+  // Check settings
+  checkSettings();
 };
-
-
 
 void baro_loop()
 {
 
-  int result = MS5611.read();
-  if (result != MS5611_READ_OK)
-  {
-    Serial.print("Error in read: ");
-    Serial.println(result);
-  }
-  else
-  {
-    Serial.print("\tP:\t");
-    Serial.println(MS5611.getPressure(), 2);
-  }
+  // Read raw values
+  uint32_t rawTemp = ms5611.readRawTemperature();
+  uint32_t rawPressure = ms5611.readRawPressure();
 
-  delay(100);
+  // Read true temperature & Pressure
+  double realTemperature = ms5611.readTemperature();
+  long realPressure = ms5611.readPressure();
 
+  // Calculate altitude
+  float absoluteAltitude = ms5611.getAltitude(realPressure);
+  float relativeAltitude = ms5611.getAltitude(realPressure, referencePressure);
+
+
+  Serial.print(relativeAltitude);    
+  Serial.println(" m");
+
+  delay(5);
 };

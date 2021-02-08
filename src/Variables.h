@@ -69,7 +69,7 @@ TinyGPSPlus gps;
 
 MPU9250 mpu;
 
-MS5611 MS5611(0x77);   // 0x76 = CSB to VCC; 0x77 = CSB to GND
+MS5611 ms5611;   // 0x76 = CSB to VCC; 0x77 = CSB to GND
 
 /*
 SimpleKalmanFilter pressureKalmanFilter(3, 3, 0.8);

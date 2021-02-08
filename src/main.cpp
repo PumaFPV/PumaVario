@@ -19,7 +19,7 @@ void setup()
     Serial.println("setup");
     pin_mode_def();
 
-    //Wire.begin();
+    Wire.begin(21, 22);
 
     //sd_setup();
 
@@ -27,7 +27,7 @@ void setup()
 
     display_setup();
     
-    //baro_setup();
+    baro_setup();
 
     //mpu_setup();
 
@@ -42,7 +42,7 @@ void loop()
 {
 
     //baro_loop();
-    //vario_loop();
+    vario_loop();
     //display_loop();
 
     //mpu_loop();  //
