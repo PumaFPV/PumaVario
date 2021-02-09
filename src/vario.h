@@ -22,7 +22,7 @@ float find_min(float tab[])
     if (first > tab[i])
     {
       first = tab[i]
-    }
+    };
   }
   return first;
 }
@@ -35,7 +35,7 @@ float find_max(float tab[])
     if (first < tab[i])
     {
       first = tab[i]
-    }
+    };
   }
   return first;
 }
