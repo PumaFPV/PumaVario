@@ -21,7 +21,7 @@ void setup()
 
     Wire.begin(21, 22);
 
-    //sd_setup();
+    sd_setup();
 
     //gps_setup();
 
