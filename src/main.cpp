@@ -32,8 +32,6 @@ void setup()
     //mpu_setup();
 
     delay(500);
-    display.fillScreen(GxEPD_WHITE);
-    display.update();
 
 }
 
