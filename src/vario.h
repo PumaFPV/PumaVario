@@ -27,7 +27,7 @@ void vario_loop()
     {
       tabPa2[i] = tabPa2[i+1];
     }
-    tabPa1[9] = ms5611.getAltitude(ms5611.readPressure());
+    tabPa2[9] = ms5611.getAltitude(ms5611.readPressure());
     sumPa1 = 0;
     sumPa2 = 0;
     for (int i = 0; i <= 9; i++)
