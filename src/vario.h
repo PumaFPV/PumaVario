@@ -45,6 +45,16 @@ void vario_loop()
     Serial.print("    kalman: ");
     Serial.println(vario * 10);
     delay(10);
+
+    if(vario > 0)
+    {
+      new_vario = algo_expo_mes_couilles(vario);
+    }
+    else
+    {
+      new_vario = -algo_expo_mes_couilles(-vario);
+    }
+
   /*
   if(vario_kalman < vario_min_threshold)  // sinking
   {
