@@ -7,6 +7,7 @@ float sumPa1;
 float sumPa2;
 float deltaPa;
 float vario;
+float expo_vario;
 
 void vario_init()
 {
@@ -29,6 +30,7 @@ void vario_loop()
       tabPa2[i] = tabPa2[i+1];
     }
     tabPa2[9] = ms5611.getAltitude(ms5611.readPressure());
+
     sumPa1 = 0;
     sumPa2 = 0;
     for (int i = 0; i <= 9; i++)
@@ -40,21 +42,25 @@ void vario_loop()
     avPa2 = sumPa2/10;
     deltaPa = avPa2 - avPa1;
     vario = varioKalmanFilter.updateEstimate(deltaPa);
-    Serial.print("    Vario: ");
+
+    Serial.print("Vario: ");
     Serial.print(deltaPa * 10);
     Serial.print("    kalman: ");
-    Serial.println(vario * 10);
+    Serial.print(vario * 10);
+    Serial.print("    Atli: ");
+    Serial.println(ms5611.getAltitude(ms5611.readPressure(), 101325) - 532);
     delay(10);
 
+/*
     if(vario > 0)
     {
-      new_vario = algo_expo_mes_couilles(vario);
+      expo_vario = algo_expo_mes_couilles(vario);
     }
     else
     {
-      new_vario = -algo_expo_mes_couilles(-vario);
+      expo_vario = -algo_expo_mes_couilles(-vario);
     }
-
+*/
   /*
   if(vario_kalman < vario_min_threshold)  // sinking
   {
