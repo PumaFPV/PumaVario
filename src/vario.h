@@ -21,7 +21,7 @@ float find_min(float tab[])
   {
     if (first > tab[i])
     {
-      first = tab[i]
+      first = tab[i];
     };
   }
   return first;
@@ -34,7 +34,7 @@ float find_max(float tab[])
   {
     if (first < tab[i])
     {
-      first = tab[i]
+      first = tab[i];
     };
   }
   return first;
@@ -68,8 +68,8 @@ void vario_loop()
     sumPa1 += tabPa1[i];
     sumPa2 += tabPa2[i];
   }
-  sumPa1 -= (find_min(tabPa1[]) + find_max(tabPa1[]));
-  sumPa2 -= (find_min(tabPa2[]) + find_max(tabPa2[]));
+  sumPa1 -= (find_min(tabPa1) + find_max(tabPa1));
+  sumPa2 -= (find_min(tabPa2) + find_max(tabPa2));
   avPa1 = sumPa1/8;
   avPa2 = sumPa2/8;
   deltaPa = avPa2 - avPa1;
