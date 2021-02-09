@@ -7,6 +7,38 @@ float sumPa1;
 float sumPa2;
 float deltaPa;
 float vario;
+float vario_vitesse;
+
+float algo_expo_mes_couilles(float alt)
+{
+
+}
+
+float find_min(float tab[])
+{
+  float first = tab[0];
+  for (int i = 1; i <= 9; i++) 
+  {
+    if (first > tab[i])
+    {
+      first = tab[i]
+    }
+  }
+  return first;
+}
+
+float find_max(float tab[])
+{
+  float first = tab[0];
+  for (int i = 1; i <= 9; i++) 
+  {
+    if (first < tab[i])
+    {
+      first = tab[i]
+    }
+  }
+  return first;
+}
 
 void vario_init()
 {
@@ -28,32 +60,35 @@ void vario_loop()
     {
       tabPa2[i] = tabPa2[i+1];
     }
-    tabPa2[9] = ms5611.getAltitude(ms5611.readPressure());
-    sumPa1 = 0;
-    sumPa2 = 0;
-    for (int i = 0; i <= 9; i++)
-    {
-      sumPa1 += tabPa1[i];
-      sumPa2 += tabPa2[i];
-    }
-    avPa1 = sumPa1/10;
-    avPa2 = sumPa2/10;
-    deltaPa = avPa2 - avPa1;
-    vario = varioKalmanFilter.updateEstimate(deltaPa);
-    Serial.print("    Vario: ");
-    Serial.print(deltaPa * 10);
-    Serial.print("    kalman: ");
-    Serial.println(vario * 10);
-    delay(10);
+  tabPa2[9] = ms5611.getAltitude(ms5611.readPressure());
+  sumPa1 = 0;
+  sumPa2 = 0;
+  for (int i = 0; i <= 9; i++)
+  {
+    sumPa1 += tabPa1[i];
+    sumPa2 += tabPa2[i];
+  }
+  sumPa1 -= (find_min(tabPa1[]) + find_max(tabPa1[]));
+  sumPa2 -= (find_min(tabPa2[]) + find_max(tabPa2[]));
+  avPa1 = sumPa1/8;
+  avPa2 = sumPa2/8;
+  deltaPa = avPa2 - avPa1;
+  vario = varioKalmanFilter.updateEstimate(deltaPa);
+  Serial.print("    Vario: ");
+  Serial.print(deltaPa * 10);
+  Serial.print("    kalman: ");
+  Serial.println(vario * 10);
+  delay(10);
 
-    if(vario > 0)
-    {
-      new_vario = algo_expo_mes_couilles(vario);
-    }
-    else
-    {
-      new_vario = -algo_expo_mes_couilles(-vario);
-    }
+  if(vario > 0)
+  {
+    vario_vitesse = algo_expo_mes_couilles(vario);
+  }
+  else
+  {
+    vario_vitesse = -algo_expo_mes_couilles(-vario);
+  }
+
 
   /*
   if(vario_kalman < vario_min_threshold)  // sinking
