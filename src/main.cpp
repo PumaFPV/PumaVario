@@ -21,7 +21,7 @@ void setup()
 
     Wire.begin(21, 22);
 
-    //sd_setup();
+    sd_setup();
 
     //gps_setup();
 
@@ -32,8 +32,6 @@ void setup()
     //mpu_setup();
 
     delay(500);
-    display.fillScreen(GxEPD_WHITE);
-    display.update();
 
 }
 

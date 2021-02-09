@@ -6,6 +6,7 @@ float avPa2; //average value of tabPa2
 float sumPa1;
 float sumPa2;
 float deltaPa;
+float vario;
 
 void vario_init()
 {
@@ -38,8 +39,22 @@ void vario_loop()
     avPa1 = sumPa1/10;
     avPa2 = sumPa2/10;
     deltaPa = avPa2 - avPa1;
+    vario = varioKalmanFilter.updateEstimate(deltaPa);
     Serial.print("    Vario: ");
-    Serial.println(deltaPa);
+    Serial.print(deltaPa * 10);
+    Serial.print("    kalman: ");
+    Serial.println(vario * 10);
+    delay(10);
+
+    if(vario > 0)
+    {
+      new_vario = algo_expo_mes_couilles(vario);
+    }
+    else
+    {
+      new_vario = -algo_expo_mes_couilles(-vario);
+    }
+
   /*
   if(vario_kalman < vario_min_threshold)  // sinking
   {

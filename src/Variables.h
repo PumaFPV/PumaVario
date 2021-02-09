@@ -71,10 +71,7 @@ MPU9250 mpu;
 
 MS5611 ms5611;   // 0x76 = CSB to VCC; 0x77 = CSB to GND
 
-/*
-SimpleKalmanFilter pressureKalmanFilter(3, 3, 0.8);
 SimpleKalmanFilter varioKalmanFilter(0.9, 0.9, 1);
-*/
 
 //--------------------------------------------------Variables--------------------------------------------------
 
