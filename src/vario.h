@@ -11,8 +11,8 @@ void vario_init()
 {
   for (int i = 0; i <= 9; i++ )
   {
-    tabPa1[i] = MS5611.getPressure();
-    tabPa2[i] = MS5611.getPressure();
+    tabPa1[i] = ms5611.getAltitude(ms5611.readPressure());
+    tabPa2[i] = ms5611.getAltitude(ms5611.readPressure());
   }
 }
 
@@ -27,7 +27,7 @@ void vario_loop()
     {
       tabPa2[i] = tabPa2[i+1];
     }
-    tabPa1[9] = MS5611.getPressure();
+    tabPa2[9] = ms5611.getAltitude(ms5611.readPressure());
     sumPa1 = 0;
     sumPa2 = 0;
     for (int i = 0; i <= 9; i++)
@@ -38,6 +38,8 @@ void vario_loop()
     avPa1 = sumPa1/10;
     avPa2 = sumPa2/10;
     deltaPa = avPa2 - avPa1;
+    Serial.print("    Vario: ");
+    Serial.println(deltaPa);
   /*
   if(vario_kalman < vario_min_threshold)  // sinking
   {
