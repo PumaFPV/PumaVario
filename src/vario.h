@@ -70,8 +70,8 @@ void vario_loop()
       sumPa1 += tabPa1[i];
       sumPa2 += tabPa2[i];
     }
-    avPa1 = sumPa1/10;
-    avPa2 = sumPa2/10;
+    avPa1 = (sumPa1 - find_max(tabPa1) - find_min(tabPa1))/8;
+    avPa2 = (sumPa2 - find_max(tabPa2) - find_min(tabPa2))/8;
     deltaPa = avPa2 - avPa1;
     vario = varioKalmanFilter.updateEstimate(deltaPa);
 
