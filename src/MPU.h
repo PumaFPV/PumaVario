@@ -21,14 +21,14 @@ void mpu_loop()
         mpu.update();
         //mpu.print();
 
-        /*
+        
         Serial.print("  ");
         Serial.print(mpu.getRoll());
         Serial.print("  ");
         Serial.print(mpu.getPitch());
         Serial.print("  ");
         Serial.println(mpu.getYaw());
-        //*/
+        
 
         prev_ms = millis();
     }

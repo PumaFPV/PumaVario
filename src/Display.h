@@ -27,6 +27,7 @@ void display_setup()
     {
         uint32_t cardSize = SD.cardSize() / (1024 * 1024);
         display.println("SDCard:" + String(cardSize) + "MB");
+
     } 
     else 
     {
